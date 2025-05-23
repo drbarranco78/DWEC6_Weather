@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: lightgray;
+    padding: 50px;
+}
+
+h1 {
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 80px;
+    background-color: rgb(110, 112, 199);
+    color: whitesmoke;
+    width: fit-content;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+#ciudadSeleccionada {
+    font-size: 28px;
+    margin-top: 10px;
+}
+
+h4 {
+    margin-bottom: 10px;
+}
+
+.contenedor {
+    display: grid;
+    grid-template-areas: "div-botones div-botones"
+        "nombreCiudad nombreCiudad"
+        "divPrevision divPrevision"
+        "divMeteo divMapa";
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    justify-items: center;
+}
+
+.div-botones {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    grid-area: div-botones;
+}
+
+.divMeteo {
+    background-color: rgb(119, 178, 245);
+    border: 2px solid black;
+    grid-area: divMeteo;
+    height: 500px;
+    width: 800px;
+    text-align: center;
+    line-height: 1.5;
+    padding: 5px 20px;
+    font-size: 26px;
+    font-weight: bold;
+    display: none;
+}
+
+.divMapa {
+    background-color: whitesmoke;
+    border: 2px solid black;
+    grid-area: divMapa;
+    height: 500px;
+    width: 800px;
+    text-align: center;
+    display: none;
+}
+
+#divPrevision {
+    width: 100%;
+    height: 300px;
+    border: 2px solid black;
+    background-color: rgb(119, 178, 245);
+    grid-area: divPrevision;
+    display: none;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.fichaDia {
+    border: 2px solid black;
+    width: 100%;
+    text-align: center;
+    padding-top: 20px;
+}
+
+#ciudadSeleccionada {
+    grid-area: nombreCiudad;
+    text-align: center;
+}
+
+button {
+    margin-left: 100px;
+    width: 150px;
+    height: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: rgb(119, 178, 245);
+    color: whitesmoke;
+    border-radius: 10px;
+}
+
+button:active {
+    background-color: green;
+}
+
+input {
+    width: 150px;
+    height: 30px;
+    font-size: 16px;
+}
+
+label {
+    font-size: 20px;
+    margin-right: 20px;
+}
+
+.imagenIcono {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 5px;
+
+}
+
+.iconoFicha {
+    width: 80px;
+    height: 80px;
+    margin-top: 10px;
+}
