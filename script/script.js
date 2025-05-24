@@ -1,6 +1,6 @@
 
 const APIKEY = '4J6CGHKLHSJXQW2UUKPY5KJ7N';
-const APIKEYMAP = '8fbca5b54cmsh5b231fa71ee9c92p1d0157jsn36f85af108af';
+const APIKEYMAP = 'fb66776bbfmsh2f6c7497d05eecfp19417fjsn2b75893cfeae';
 let inputCiudad = document.getElementById("inCiudad");
 let btTiempoActual = document.getElementById("btTiempoActual");
 let btPrevision = document.getElementById("btPrevision");
@@ -36,7 +36,7 @@ function obtenerLugar(ciudad, prevision10) {
     $.ajax({
       async: true,
       crossDomain: true,
-      url: `https://wft-geo-db.p.rapidapi.com/v1/geo/places?namePrefix=${encodeURIComponent(ciudad)}&types=CITY&languageCode=es&sort=-population`,
+      url: `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?namePrefix=${encodeURIComponent(ciudad)}&languageCode=es&sort=-population`,
       method: 'GET',
       headers: {
         'x-rapidapi-key': APIKEYMAP,
