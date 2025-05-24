@@ -36,7 +36,7 @@ function obtenerLugar(ciudad, prevision10) {
     $.ajax({
       async: true,
       crossDomain: true,
-      url: `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?namePrefix=${encodeURIComponent(ciudad)}&languageCode=es&sort=-population`,
+      url: `https://wft-geo-db.p.rapidapi.com/v1/geo/places?namePrefix=${encodeURIComponent(ciudad)}&types=CITY&languageCode=es&sort=-population`,
       method: 'GET',
       headers: {
         'x-rapidapi-key': APIKEYMAP,
@@ -135,7 +135,8 @@ async function obtenerTiempoActual(latitud, longitud) {
 
   // Obtiene la referencia del icono de estado y genera la ruta de la imagen
   let icono = data.currentConditions.icon;
-  let rutaIcono = "../img/" + icono + ".svg";
+  let rutaIcono = `${window.location.origin}/img/${icono}.svg`;
+  // let rutaIcono = "../img/" + icono + ".svg";
   // Crea un elemento para la imagen del icono
   let imagenIcono = document.createElement('img');
   imagenIcono.className = "imagenIcono";
@@ -169,15 +170,17 @@ async function obtenerTiempoActual(latitud, longitud) {
     divMeteo.innerHTML += "Visibilidad: " + data.currentConditions.visibility + " Km<br>";
   }
   divMeteo.innerHTML += "Estaciones meteorológicas: ";
-  const estaciones = Object.values(data.stations);
-  estaciones.forEach((station, index) => {
-    divMeteo.innerHTML += station.id;
-
-    // Evita agregar la coma después del último elemento
-    if (index < estaciones.length - 1) {
-      divMeteo.innerHTML += ", ";
-    }
-  });
+  if (data.stations) {
+    const estaciones = Object.values(data.stations);
+    estaciones.forEach((station, index) => {
+      divMeteo.innerHTML += station.id;
+      if (index < estaciones.length - 1) {
+        divMeteo.innerHTML += ", ";
+      }
+    });
+  } else {
+    divMeteo.innerHTML += "No se encontraron estaciones disponibles.";
+  }
 
   // Llama a la función para mostrar el mapa pasándole las coordenadas
   mostrarMapa(data.latitude, data.longitude);
@@ -214,7 +217,8 @@ async function mostrarTiempo10Dias(latitud, longitud) {
     // Crea la imagen que muestra el icono en cada ficha 
     let imagenIcono = document.createElement('img');
     let icono = data.days[i].hours[11].icon;
-    let rutaIcono = "../img/" + icono + ".svg";
+    // let rutaIcono = "../img/" + icono + ".svg";
+    let rutaIcono = `${window.location.origin}/img/${icono}.svg`;
     imagenIcono.src = rutaIcono;
     imagenIcono.className = "iconoFicha";
 
