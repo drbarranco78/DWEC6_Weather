@@ -1,6 +1,6 @@
 
 const APIKEY = '4J6CGHKLHSJXQW2UUKPY5KJ7N';
-
+const APIKEYMAP = '8fbca5b54cmsh5b231fa71ee9c92p1d0157jsn36f85af108af';
 let inputCiudad = document.getElementById("inCiudad");
 let btTiempoActual = document.getElementById("btTiempoActual");
 let btPrevision = document.getElementById("btPrevision");
@@ -34,10 +34,14 @@ function obtenerLugar(ciudad, prevision10) {
 
     // Método ajax que recibe la URL de la consulta con el nombre de la ciudad. Se ordenan los resultados por población
     $.ajax({
-      url: `https://geodb-free-service.wirefreethought.com/v1/geo/places?limit=10&offset=0&types=CITY&namePrefix=${ciudad}&languageCode=es&sort=-population`,
-      type: "GET",
-      dataType: "json",
       async: true,
+      crossDomain: true,
+      url: `https://wft-geo-db.p.rapidapi.com/v1/geo/places?namePrefix=${encodeURIComponent(ciudad)}&types=CITY&languageCode=es&sort=-population`,
+      method: 'GET',
+      headers: {
+        'x-rapidapi-key': APIKEYMAP,
+        'x-rapidapi-host': 'wft-geo-db.p.rapidapi.com'
+      },
 
       // Si se produce correctamente
       success: function (datos_devueltos) {
@@ -125,7 +129,7 @@ async function obtenerTiempoActual(latitud, longitud) {
   const apiUrl = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${latitud},${longitud}?unitGroup=metric&key=${APIKEY}`;
   let respuesta = await fetch(apiUrl);
   data = await respuesta.json();
-  
+
   // Establece el nombre de la ciudad que se guardó en la consulta a la API de GeoPlaces
   ciudadSeleccionada.textContent = nombreLugar;
 
