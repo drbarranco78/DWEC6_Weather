@@ -15,6 +15,9 @@ let divMapa = document.querySelector('.divMapa');
 let divPrevision = document.getElementById("divPrevision");
 let contenedor;
 let imagenNotFound;
+const basePath = window.location.hostname === "localhost"
+    ? "" // en local, no hay subcarpeta
+    : window.location.pathname.replace(/\/[^/]*$/, "/"); // en GitHub Pages, saca el archivo (index.html)
 
 /* Obtiene la ciudad y llama a un método u otro en función de si se ha pulsado el botón de la previsión a 10 días (prevision10=true) 
 *  o el de tiempo actual (prevision10="") -> (si le pongo false lo incluye en la URL (¿?) y da error) 
@@ -30,7 +33,10 @@ function obtenerLugar(ciudad, prevision10) {
     $('#imagenNotFound').remove();
 
     // Muestra el gif mientras se carga la página
-    $("#ciudadSeleccionada").html("<img src='../img/ajax-loader1.gif'>");
+    // $("#ciudadSeleccionada").html("<img src='../img/ajax-loader1.gif'>");
+    // $("#ciudadSeleccionada").html(`<img src="${window.location.origin}${window.location.pathname}img/ajax-loader1.gif">`);
+    $("#ciudadSeleccionada").html(`<img src="${window.location.origin}${basePath}img/ajax-loader1.gif">`);
+
 
     // Método ajax que recibe la URL de la consulta con el nombre de la ciudad. Se ordenan los resultados por población
     $.ajax({
@@ -135,7 +141,16 @@ async function obtenerTiempoActual(latitud, longitud) {
 
   // Obtiene la referencia del icono de estado y genera la ruta de la imagen
   let icono = data.currentConditions.icon;
-  let rutaIcono = `${window.location.origin}/img/${icono}.svg`;
+  //let rutaIcono = `${window.location.origin}${window.location.pathname}img/${icono}.svg`;
+  // Detecta la base path del proyecto
+  // const basePath = window.location.hostname === "localhost"
+  //   ? "" // en local, no hay subcarpeta
+  //   : window.location.pathname.replace(/\/[^/]*$/, "/"); // en GitHub Pages, saca el archivo (index.html)
+
+  // Ruta completa de la imagen
+  let rutaIcono = `${window.location.origin}${basePath}img/${icono}.svg`;
+
+
   // let rutaIcono = "../img/" + icono + ".svg";
   // Crea un elemento para la imagen del icono
   let imagenIcono = document.createElement('img');
@@ -218,7 +233,8 @@ async function mostrarTiempo10Dias(latitud, longitud) {
     let imagenIcono = document.createElement('img');
     let icono = data.days[i].hours[11].icon;
     // let rutaIcono = "../img/" + icono + ".svg";
-    let rutaIcono = `${window.location.origin}/img/${icono}.svg`;
+    // let rutaIcono = `${window.location.origin}/img/${icono}.svg`;
+    let rutaIcono = `${window.location.origin}${basePath}img/${icono}.svg`;
     imagenIcono.src = rutaIcono;
     imagenIcono.className = "iconoFicha";
 
