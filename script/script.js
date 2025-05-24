@@ -34,7 +34,7 @@ function obtenerLugar(ciudad, prevision10) {
 
     // Método ajax que recibe la URL de la consulta con el nombre de la ciudad. Se ordenan los resultados por población
     $.ajax({
-      url: `http://geodb-free-service.wirefreethought.com/v1/geo/places?limit=10&offset=0&types=CITY&namePrefix=${ciudad}&languageCode=es&sort=-population`,
+      url: `https://geodb-free-service.wirefreethought.com/v1/geo/places?limit=10&offset=0&types=CITY&namePrefix=${ciudad}&languageCode=es&sort=-population`,
       type: "GET",
       dataType: "json",
       async: true,
